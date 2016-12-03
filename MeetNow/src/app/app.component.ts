@@ -8,46 +8,48 @@ import {AlertController} from "ionic-angular";
 
 @Component({
   templateUrl: 'app.html'
+
 })
 export class MyApp {
   rootPage = HomePage;
 
-  constructor(platform: Platform, private alertCtrl: AlertController) {
+  constructor(platform: Platform, public alertCtrl: AlertController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.makeAlert();
+
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-
+      this.meetSuggestionConfirm("Marcus Schmitt", 24, "man");
 
     }
 
     );
 
   }
-
-  public makeAlert() {
+  public meetSuggestionConfirm(name: string, age: number, gender: string) {
     let alert = this.alertCtrl.create({
-      title: 'Nearby Match',
-      message: 'Do you want to meet?',
+      title: 'An interresting person is nearby!',
+      message: 'Would you like to meet ' + name + " - He is a " + age + " year old " + gender,
       buttons: [
         {
           text: 'No, thank you',
           role: 'cancel',
           handler: () => {
-            console.log('Callback NO');
+            console.log('Cancel clicked, next');
           }
         },
         {
-          text: 'Yes',
+          text: 'Yes, lets meet!',
           handler: () => {
-            console.log('Callback Yes');
+            console.log('Yes is clicked - Do action');
           }
         }
       ]
     });
     alert.present();
   }
+
+
 }
